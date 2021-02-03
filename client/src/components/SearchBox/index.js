@@ -3,17 +3,17 @@ import "./style.css";
 
 function SearchBox(props) {
     return (
-        <form className="search">
+        <form className="search float-left">
             <div className="form-group">
                 <br />
                 <input
-                    value={props.search}
+                    value={props.value}
                     onChange={props.handleInputChange}
-                    name="name"
+                    name={props.name}
                     type="text"
                     className="form-control"
-                    placeholder="Search by Allocation Reference"
-                    id="allocRef_search"
+                    placeholder={props.filterby}
+                    id={props.filterby}
                 />
             </div>
         </form>

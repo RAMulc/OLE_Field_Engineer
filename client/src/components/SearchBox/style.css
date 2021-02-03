@@ -1,3 +1,8 @@
+p {
+    text-align: left;
+}
+
 .search {
-    width: 33%;
+    width: 150px;
+    margin-left: 10px;
 }

@@ -21,10 +21,13 @@
     "nodemon": "^1.18.7"
   },
   "dependencies": {
+    "@google-cloud/storage": "^5.7.3",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "express": "^4.16.3",
+    "fast-crc32c": "^2.0.0",
     "if-env": "^1.0.4",
-    "mongoose": "^5.11.13"
+    "mongoose": "^5.11.13",
+    "react-responsive": "^8.2.0"
   }
 }

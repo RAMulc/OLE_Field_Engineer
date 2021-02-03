@@ -9,6 +9,18 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  find: function (req, res) {
+    const filterCriteria = JSON.parse(req.params.criteria);
+    db.SystemDesign
+      .find({
+        ptaDgnNumber: { $regex: "(?i).*" + filterCriteria.ptaDgnNo + ".*" },
+        allocReference: { $regex: "(?i).*" + filterCriteria.allocRef + ".*" },
+        title: { $regex: "(?i).*" + filterCriteria.title + ".*" }
+      })
+      .sort({ allocReference: -1 })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   findById: function (req, res) {
     db.SystemDesign
       .findById(req.params.id)

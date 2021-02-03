@@ -1,64 +1,81 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import API from "../utils/API";
 import SearchBox from "../components/SearchBox";
 import SystemDesignTable from "../components/SystemDesignTable";
 import { Col, Row } from "../components/Grid";
 
-class SystemDesign extends Component {
-    state = {
-        results: [],
-        search: "",
-        err: ""
-    };
+function SystemDesign(props) {
+    const [systemDesigns, setsystemDesigns] = useState([])
+    const [formObject, setFormObject] = useState({
+        ptaDgnNo: "",
+        allocRef: "",
+        title: ""
+    })
 
-    origData = [];
-
-    componentDidMount() {
+    useEffect(() => {
         API.getSystemDesign()
             .then((res) => {
-                this.origData = res.data;
-                this.setState({ results: res.data });
-                //console.log("results", res.data);
+                setsystemDesigns(res.data);
             })
             .catch(err => console.log(err));
-    }
+    }, []);
 
-    handleInputChange = event => {
-        this.setState({ search: event.target.value });
-        // console.log("Changed", event.target.value);
-        if (event.target.value === "") {
-            // console.log("null: ", event.target.value);
-            this.setState({ results: this.origData });
-        }
-        else {
-            const tData = this.origData;
-            const filteredResults = tData.filter(
-                dgn => dgn.allocReference.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1);
-            this.setState({ results: filteredResults });
-        }
+    useEffect(() => {
+        filterSystemDesign();
+    }, [formObject]);
 
+    function handleInputChange(event) {
+        const { name, value } = event.target;
+        setFormObject({ ...formObject, [name]: value })
     };
 
-    render() {
-        return (
-            <div>
-                <Row>
-                    <Col size={"12"} justify={'align-self-center'}>
-                        <SearchBox
-                            handleInputChange={this.handleInputChange}
-                            name={this.state.search}
-                        />
-                    </Col>
-                </Row>
-                <Row>
-                    <Col size={"12"} justify={'align-self-start'}>
-                        <SystemDesignTable DataTable={this.state.results} />
-                    </Col>
-                </Row>
+    function filterSystemDesign() {
+        const sysData = {
+            ptaDgnNo: formObject.ptaDgnNo,
+            allocRef: formObject.allocRef,
+            title: formObject.title
+        };
 
-            </div>
-        );
-    }
+        API.getSystemDesignByFilter(JSON.stringify(sysData))
+            .then((res) => {
+                setsystemDesigns(res.data);
+                //console.log("results:", res.data);
+            })
+            .catch(err => console.log(err));
+    };
+
+    return (
+        <div>
+            <Row>
+                <Col size={"12"} justify={'align-self-center'}>
+                    <p className='float-left'>Search by:</p>
+                    <SearchBox
+                        handleInputChange={handleInputChange}
+                        name="ptaDgnNo"
+                        value={formObject.ptaDgnNo}
+                        filterby="PTA Drawing No."
+                    />
+                    <SearchBox
+                        handleInputChange={handleInputChange}
+                        name="allocRef"
+                        value={formObject.allocRef}
+                        filterby="Allocation Ref."
+                    />
+                    <SearchBox
+                        handleInputChange={handleInputChange}
+                        name="title"
+                        value={formObject.title}
+                        filterby="Title"
+                    />
+                </Col>
+            </Row>
+            <Row>
+                <Col size={"12"} justify={'align-self-start'}>
+                    <SystemDesignTable DataTable={systemDesigns} />
+                </Col>
+            </Row>
+        </div>
+    );
 }
 
 export default SystemDesign;

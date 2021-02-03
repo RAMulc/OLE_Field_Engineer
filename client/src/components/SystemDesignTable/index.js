@@ -1,5 +1,7 @@
 import React from "react";
 import DataTable from 'react-data-table-component';
+import { Link } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 const tableStyle = {
     headCells: {
@@ -16,10 +18,7 @@ const tableStyle = {
     },
 };
 
-const scrnSize = Math.max(window.screen.availWidth, window.screen.availHeight);
-console.log("scrnSize", scrnSize);
-
-let columns = [
+const columnsMain = [
     {
         name: 'PTA Drawing No.',
         selector: 'ptaDgnNumber',
@@ -37,49 +36,49 @@ let columns = [
         selector: 'title',
         sortable: true,
         wrap: true,
+        minWidth: '350px',
         allowOverflow: false
     },
 ];
 
-if (scrnSize > 1000) {
-    columns = [
-        ...columns,
-        {
-            name: 'Other Drawing Nos',
-            selector: 'otherDgnNumbers',
-            cell: row => <p>{row.otherDgnNumbers.join(" ")}</p>,
-            sortable: true,
-            //minWidth: '250px',
-            wrap: true,
-        },
-        {
-            name: 'Revision',
-            selector: 'revision',
-            center: true,
-            //width: '75px',
-        },
-    ];
-}
-
-columns = [
-    ...columns,
+const columnsOptional = [
     {
-        name: 'Open',
+        name: 'Other Drawing Nos',
+        selector: 'otherDgnNumbers',
+        cell: row => <p>{row.otherDgnNumbers.join(" ")}</p>,
+        sortable: true,
+        //minWidth: '250px',
+        wrap: true,
+    },
+    {
+        name: 'Revision',
+        selector: 'revision',
+        center: true,
+        width: '75px',
+    },
+];
+
+const columnsView = [
+    {
+        name: 'View',
         selector: '_id',
-        cell: () => <button raised primary >....</button>,
+        cell: row => <button>
+            <Link to={"/pdf/" + row.ptaDgnNumber + ".pdf"}>...</Link>
+        </button>,
         ignoreRowClick: true,
         allowOverflow: true,
         button: true,
         center: true,
-        //width: '75px',
+        width: '75px',
     },];
 
-    console.log("cols", columns);
-
 function EmpTable(props) {
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
+
     return (
+
         <DataTable
-            columns={columns}
+            columns={isMobile ? [...columnsMain, ...columnsView] : [...columnsMain, ...columnsOptional, ...columnsView]}
             data={props.DataTable}
             keyField={"_id"}
             customStyles={tableStyle}
