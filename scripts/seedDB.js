@@ -921,3 +921,15 @@ db.SystemDesign
         console.error(err);
         process.exit(1);
     });
+
+db.User
+    .remove({})
+    .then(() => db.User.createCollection())
+    .then(data => {
+        console.log("Collection created!");
+        process.exit(0);
+    })
+    .catch(err => {
+        console.error(err);
+        process.exit(1);
+    });

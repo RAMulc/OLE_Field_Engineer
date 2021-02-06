@@ -1,14 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import auth from "../Auth";
+import React, { useState, useEffect, useContext } from "react";
+import { useHistory, Link } from "react-router-dom";
+import SignInOptions from "../auth/SignInOptions";
+import UserContext from '../../context/userContext';
+
 import "./style.css";
 
 function Navbar() {
     const [activePage, setActivePage] = useState("/systemdesign");
+    const [isAdmin, setIsAdmin] = useState(false);
+    const { userData } = useContext(UserContext);
+    const history = useHistory();
 
     useEffect(() => {
         setActivePage(window.location.pathname);
     }, []);
+
+    useEffect(() => {
+        setIsAdmin(userData.isAdmin);
+    }, [userData]);
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -45,15 +54,22 @@ function Navbar() {
                     <li className={activePage === "/signin"
                         ? "nav-item active"
                         : "nav-item"}>
-                        <Link
-                            to="/signin"
-                            onClick={() => setActivePage("/signin")}
-                            className="nav-link"
-                        >
-
-                            SignIn
-                        </Link>
+                        <SignInOptions />
                     </li>
+                    {isAdmin && (
+                        <li className={activePage === "/users"
+                            ? "nav-item active"
+                            : "nav-item"}>
+                            <Link
+                                to="/users"
+                                onClick={() => setActivePage("/users")}
+                                className="nav-link"
+                            >
+                                Users
+                        </Link>
+                        </li>
+                    )}
+
                 </ul>
             </div>
         </nav>

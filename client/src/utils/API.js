@@ -24,5 +24,25 @@ export default {
     // Get drawing link from Google Storage
     getGoogleStoragePdf: function (id) {
         return axios.get("/api/pdf/" + id);
-    }
+    },
+    // User signin
+    userSignIn: function (userData) {
+        return axios.post("/api/auth/signin", userData);
+    },
+    // User signup
+    userSignUp: function (userData) {
+        return axios.post("/api/auth/signup", userData);
+    },
+    // Check token
+    userValidToken: function (tokenData) {
+        return axios.post("/api/auth/tokenIsValid", tokenData);
+    },
+    // Get user
+    getUserByID: function (id) {
+        return axios.get("/api/auth/" + id);
+    },
+    // Get all users
+    getAllUsers: function () {
+        return axios.get("/api/auth");
+    },
 };

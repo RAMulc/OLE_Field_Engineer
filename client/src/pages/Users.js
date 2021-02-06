@@ -1,36 +1,35 @@
 import React, { useEffect, useState, useContext } from "react";
 import API from "../utils/API";
 import SearchBox from "../components/SearchBox";
-import SystemDesignTable from "../components/SystemDesignTable";
+import UserTable from "../components/UserTable";
 import { Col, Row } from "../components/Grid";
 import UserContext from '../context/userContext';
 import { useHistory, Link } from 'react-router-dom';
 
-function SystemDesign(props) {
-    const [systemDesigns, setsystemDesigns] = useState([])
+function Users(props) {
+    const [users, setUsers] = useState([])
     const [formObject, setFormObject] = useState({
-        ptaDgnNo: "",
-        allocRef: "",
-        title: ""
+        name: ""
     });
     const { userData } = useContext(UserContext);
     const history = useHistory();
 
     useEffect(() => {
         if (!userData.user) {
-            console.log("userData", userData);
+            // console.log("userData", userData);
             history.push("/signin");
         } else {
-            API.getSystemDesign()
+            API.getAllUsers()
                 .then((res) => {
-                    setsystemDesigns(res.data);
+                    // console.log("res", res);
+                    setUsers(res.data);
                 })
                 .catch(err => console.log(err));
         }
     }, []);
 
     useEffect(() => {
-        filterSystemDesign();
+        filterUsers();
     }, [formObject]);
 
     function handleInputChange(event) {
@@ -38,17 +37,21 @@ function SystemDesign(props) {
         setFormObject({ ...formObject, [name]: value })
     };
 
-    function filterSystemDesign() {
-        const sysData = {
-            ptaDgnNo: formObject.ptaDgnNo,
-            allocRef: formObject.allocRef,
-            title: formObject.title
+    function filterUsers() {
+        const userName = {
+            name: formObject.name
         };
 
-        API.getSystemDesignByFilter(JSON.stringify(sysData))
+        // API.getSystemDesignByFilter(JSON.stringify(userName))
+        //     .then((res) => {
+        //         setsystemDesigns(res.data);
+        //         //console.log("results:", res.data);
+        //     })
+        //     .catch(err => console.log(err));
+        API.getAllUsers()
             .then((res) => {
-                setsystemDesigns(res.data);
-                //console.log("results:", res.data);
+                // console.log("res", res);
+                setUsers(res.data);
             })
             .catch(err => console.log(err));
     };
@@ -59,30 +62,18 @@ function SystemDesign(props) {
                 <div>
                     <Row>
                         <Col size={"12"} justify={'align-self-center'}>
-                            <p className='float-left'>Search by:</p>
+                            <p className='float-left'>Search for User by name:</p>
                             <SearchBox
                                 handleInputChange={handleInputChange}
-                                name="ptaDgnNo"
-                                value={formObject.ptaDgnNo}
-                                filterby="PTA Drawing No."
-                            />
-                            <SearchBox
-                                handleInputChange={handleInputChange}
-                                name="allocRef"
-                                value={formObject.allocRef}
-                                filterby="Allocation Ref."
-                            />
-                            <SearchBox
-                                handleInputChange={handleInputChange}
-                                name="title"
-                                value={formObject.title}
-                                filterby="Title"
+                                name="name"
+                                value={formObject.name}
+                                filterby="name"
                             />
                         </Col>
                     </Row>
                     <Row>
                         <Col size={"12"} justify={'align-self-start'}>
-                            <SystemDesignTable DataTable={systemDesigns} />
+                            <UserTable DataTable={users} />
                         </Col>
                     </Row>
                 </div>
@@ -97,4 +88,4 @@ function SystemDesign(props) {
     );
 }
 
-export default SystemDesign;
+export default Users;

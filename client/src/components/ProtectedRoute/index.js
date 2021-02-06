@@ -5,9 +5,11 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
     return (
         <Route
             {...rest}
-            render={props => {
-                return <Component {...props} />;
-            }}
+            render={
+                props =>
+                    auth.isAuthenticated === true ?
+                        (<Component {...props} />) : (<Redirect to="/login" />)
+            }
         />
     );
 };

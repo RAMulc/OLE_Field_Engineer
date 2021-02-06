@@ -74,7 +74,6 @@ const columnsView = [
 
 function EmpTable(props) {
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
-
     return (
 
         <DataTable
