@@ -168,7 +168,7 @@ module.exports = {
     findAll: function (req, res) {
         User.find(req.query)
             .then(users => {
-                console.log("users", users);
+                // console.log("users", users);
                 res.json({ users });
             })
     },

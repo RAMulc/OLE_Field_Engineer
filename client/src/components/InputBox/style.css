@@ -1,0 +1,37 @@
+p {
+    text-align: left;
+}
+
+.frm {
+    margin: '10px 10px 10px 0';
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 2px;
+    border-color: black;
+    background-color: whitesmoke;
+}
+
+label {
+    padding: 10px;
+}
+
+.search {
+    width: 150px;
+    margin-left: 10px;
+}
+
+.input {
+    margin-left: 10px;
+}
+
+.narrow {
+    width: 100px;
+}
+
+.medium {
+    width: 200px;
+}
+
+.wide {
+    width: 620px;
+}

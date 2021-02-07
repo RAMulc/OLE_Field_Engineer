@@ -21,6 +21,10 @@ export default {
     saveSystemDesign: function (systemDesignData) {
         return axios.post("/api/systemdesigns", systemDesignData);
     },
+    // Saves system design to the database
+    updateSystemDesign: function (id, systemDesignData) {
+        return axios.put("/api/systemdesigns/" + id, systemDesignData);
+    },
     // Get drawing link from Google Storage
     getGoogleStoragePdf: function (id) {
         return axios.get("/api/pdf/" + id);

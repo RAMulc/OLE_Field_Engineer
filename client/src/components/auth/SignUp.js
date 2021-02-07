@@ -3,6 +3,9 @@ import { Link, useHistory } from "react-router-dom";
 import API from "../../utils/API";
 import UserContext from "../../context/userContext";
 import ErrorNotification from "../ErrorNotification";
+import { Container, Col, Row } from "../../components/Grid";
+import InputBox from "../../components/InputBox";
+import Button from "../../components/Button";
 
 function SignUp() {
     const [user, setUser] = useState({
@@ -55,73 +58,82 @@ function SignUp() {
     };
 
     return (
-        <div className="container">
-            <div style={{ marginTop: "4rem" }} className="row">
-                <div className="col s8 offset-s2">
-                    <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                        <h4>
-                            <b>Register</b>
-                        </h4>
-                        <p className="grey-text text-darken-1">
-                            Already have an account? <Link to="/signin">Log in</Link>
-                        </p>
-                    </div>
-                    <form noValidate onSubmit={onSubmit}>
-                        <div className="input-field col s12">
-                            <input
-                                onChange={onChange}
+
+        <Container>
+            <Row>
+                <Col size={"8"}>
+                    <br />
+                    <h4>
+                        <b>Register</b>
+                    </h4>
+                    <p className="grey-text text-darken-1">
+                        Already have an account? <Link to="/signin">Log in</Link>
+                    </p>
+                    <Row>
+                        <Col size={"5"}>
+                            <InputBox
+                                handleInputChange={onChange}
+                                name="name"
                                 value={user.name}
                                 id="name"
+                                placeholderText="Name"
+                                clasNam="input"
                                 type="text"
                             />
-                            <label htmlFor="name">Name</label>
-                        </div>
-                        <div className="input-field col s12">
-                            <input
-                                onChange={onChange}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col size={"5"}>
+                            <InputBox
+                                handleInputChange={onChange}
+                                name="email"
                                 value={user.email}
                                 id="email"
-                                type="email"
+                                placeholderText="Email"
+                                clasNam="input"
+                                type="text"
                             />
-                            <label htmlFor="email">Email</label>
-                        </div>
-                        <div className="input-field col s12">
-                            <input
-                                onChange={onChange}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col size={"5"}>
+                            <InputBox
+                                handleInputChange={onChange}
+                                name="password"
                                 value={user.password}
                                 id="password"
+                                placeholderText="Password"
+                                clasNam="input"
                                 type="password"
                             />
-                            <label htmlFor="password">Password</label>
-                        </div>
-                        <div className="input-field col s12">
-                            <input
-                                onChange={onChange}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col size={"5"}>
+                            <InputBox
+                                handleInputChange={onChange}
+                                name="password2"
                                 value={user.password2}
                                 id="password2"
+                                placeholderText="Verify Password"
+                                clasNam="input"
                                 type="password"
                             />
-                            <label htmlFor="password2">Confirm Password</label>
-                        </div>
-                        {error.length > 0 && <ErrorNotification messages={error} clearError={() => setError([])} />}
-                        <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                            <button
-                                style={{
-                                    width: "150px",
-                                    borderRadius: "3px",
-                                    letterSpacing: "1.5px",
-                                    marginTop: "1rem"
-                                }}
-                                type="submit"
-                                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                            >
-                                Sign up
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col size={"5"}>
+                            {error.length > 0 && <ErrorNotification messages={error} clearError={() => setError([])} />}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col size={"5"}>
+                            <Button onClick={onSubmit} name="register" label="Register"></Button>
+                        </Col>
+                    </Row>
+                </Col>
+            </Row>
+        </Container>
     );
 }
 

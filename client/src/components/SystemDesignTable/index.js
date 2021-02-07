@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import DataTable from 'react-data-table-component';
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import UserContext from '../../context/userContext';
 
 const tableStyle = {
     headCells: {
@@ -72,12 +73,32 @@ const columnsView = [
         width: '75px',
     },];
 
-function EmpTable(props) {
-    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
-    return (
+const columnsEdit = [
+    {
+        name: 'Edit',
+        selector: '_id',
+        cell: row => <button>
+            <Link to={"/pdf/" + row.ptaDgnNumber + ".pdf"}>...</Link>
+        </button>,
+        ignoreRowClick: true,
+        allowOverflow: true,
+        button: true,
+        center: true,
+        width: '75px',
+    },];
 
+function EmpTable(props) {
+    const isMobile = useMediaQuery({ query: '(max-width: 1000px)' });
+    const { userData } = useContext(UserContext);
+
+    return (
         <DataTable
-            columns={isMobile ? [...columnsMain, ...columnsView] : [...columnsMain, ...columnsOptional, ...columnsView]}
+            columns={isMobile ?
+                [...columnsMain, ...columnsView] :
+                userData.isAdmin ?
+                    [...columnsMain, ...columnsOptional, ...columnsEdit] :
+                    [...columnsMain, ...columnsOptional, ...columnsView]
+            }
             data={props.DataTable}
             keyField={"_id"}
             customStyles={tableStyle}

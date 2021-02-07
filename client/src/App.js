@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import SystemDesign from "./pages/SystemDesign";
@@ -9,10 +9,13 @@ import NoMatch from "./pages/NoMatch";
 
 import SignUp from "./components/auth/SignUp";
 import SignIn from "./components/auth/SignIn";
-import API from "./utils/API";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+import AdminRoute from "./components/auth/AdminRoute";
 import UserContext from './context/userContext';
+import SystemDesignContext from './context/SystemDesignContext';
 
 function App() {
+  const [systemDesigns, setsystemDesigns] = useState([])
   const [userData, setUserData] = useState({
     token: undefined,
     user: undefined,
@@ -20,49 +23,22 @@ function App() {
     isAdmin: false
   });
 
-  useEffect(() => {
-    checkLoggedIn();
-  }, []);
-
-  function checkLoggedIn() {
-    let token = "";
-    if (!localStorage.hasOwnProperty("auth-token")) {
-      localStorage.setItem("auth-token", "");
-    } else {
-      token = localStorage.getItem("auth-token");
-    }
-
-    API.userValidToken({ headers: { "x-auth-token": token } })
-      .then((res) => {
-        if (res.data.success) {
-          API.getUserByID(res.data.userId)
-            .then((userRes) => {
-              setUserData({
-                token: token,
-                user: userRes.data.user.name,
-                isAdmin: userRes.data.user.isAdmin
-              })
-            })
-        }
-      })
-      .catch(err => console.log(err));
-  };
-
   return (
     <Router>
       <div>
         <UserContext.Provider value={{ userData, setUserData }}>
           <Navbar />
-          
-          <Switch>
-            <Route exact path={["/", "/systemdesign"]} component={SystemDesign} />
-            <Route exact path="/pdf/:id" component={Pdf} />
-            <Route exact path="/calculations" component={Calculations} />
-            <Route exact path="/users" component={Users} />
-            <Route exact path="/signin" component={SignIn} />
-            <Route exact path="/signup" component={SignUp} />
-            <Route component={NoMatch} />
-          </Switch>
+          <SystemDesignContext.Provider value={{ systemDesigns, setsystemDesigns }}>
+            <Switch>
+              <ProtectedRoute exact path={["/", "/systemdesign"]} component={SystemDesign} />
+              <ProtectedRoute exact path="/pdf/:id" component={Pdf} />
+              <AdminRoute exact path="/users" component={Users} />
+              <Route exact path="/signin" component={SignIn} />
+              <Route exact path="/signup" component={SignUp} />
+              <Route exact path="/calculations" component={Calculations} />
+              <Route component={NoMatch} />
+            </Switch>
+          </SystemDesignContext.Provider>
         </UserContext.Provider>
       </div>
     </Router>

@@ -3,6 +3,9 @@ import { Link, useHistory } from "react-router-dom";
 import API from "../../utils/API";
 import UserContext from "../../context/userContext";
 import ErrorNotification from "../ErrorNotification";
+import { Container, Col, Row } from "../../components/Grid";
+import InputBox from "../../components/InputBox";
+import Button from "../../components/Button";
 
 function SignIn() {
     const [user, setUser] = useState({
@@ -28,8 +31,10 @@ function SignIn() {
             email: user.email,
             password: user.password
         };
+        console.log("ud", userData);
         API.userSignIn(userData)
             .then((res) => {
+                console.log("rd", res.data);
                 setUserData({
                     token: res.data.token,
                     user: res.data.message.name,
@@ -43,8 +48,9 @@ function SignIn() {
                 if (inputErrors) {
                     let iErrors = [];
                     for (let i = 0; i < inputErrors.length; i++) {
-                        for (const [key, value] of Object.entries(inputErrors[i])) {
-                            //iErrors.push(`${key}: ${value}`);
+                        // for (const [key, value] of Object.entries(inputErrors[i])) {
+                        // iErrors.push(`${key}: ${value}`);
+                        for (const [value] of Object.entries(inputErrors[i])) {
                             iErrors.push(`${value}`);
                         }
                     }
@@ -54,55 +60,55 @@ function SignIn() {
     };
 
     return (
-        <div className="container">
-            <div style={{ marginTop: "4rem" }} className="row">
-                <div className="col s8 offset-s2">
-                    <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                        <h4>
-                            <b>Login</b>
-                        </h4>
-                        <p className="grey-text text-darken-1">
-                            Don't have an account? <Link to="/signup">Register </Link>
-                        </p>
-                    </div>
-                    <form noValidate onSubmit={onSubmit}>
-                        <div className="input-field col s12">
-                            <input
-                                onChange={onChange}
+        <Container>
+            <Row>
+                <Col size={"8"}>
+                    <br />
+                    <h4>
+                        <b>Login</b>
+                    </h4>
+                    <p>
+                        Don't have an account? <Link to="/signup">Register </Link>
+                    </p>
+                    <Row>
+                        <Col size={"5"}>
+                            <InputBox
+                                handleInputChange={onChange}
+                                name="email"
                                 value={user.email}
                                 id="email"
-                                type="email"
+                                placeholderText="email"
+                                clasNam="input"
+                                type="text"
                             />
-                            <label htmlFor="email">Email</label>
-                        </div>
-                        <div className="input-field col s12">
-                            <input
-                                onChange={onChange}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col size={"5"}>
+                            <InputBox
+                                handleInputChange={onChange}
+                                name="password"
                                 value={user.password}
                                 id="password"
+                                placeholderText="Password"
+                                clasNam="input"
                                 type="password"
                             />
-                            <label htmlFor="password">Password</label>
-                        </div>
-                        {error.length > 0 && <ErrorNotification messages={error} clearError={() => setError([])} />}
-                        <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                            <button
-                                style={{
-                                    width: "150px",
-                                    borderRadius: "3px",
-                                    letterSpacing: "1.5px",
-                                    marginTop: "1rem"
-                                }}
-                                type="submit"
-                                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                            >
-                                Login
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col size={"5"}>
+                            {error.length > 0 && <ErrorNotification messages={error} clearError={() => setError([])} />}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col size={"5"}>
+                                <Button onClick={onSubmit} name="login" label="Login"></Button>
+                        </Col>
+                    </Row>
+                </Col>
+            </Row>
+        </Container>
     );
 }
 

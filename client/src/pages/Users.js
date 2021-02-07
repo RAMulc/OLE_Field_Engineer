@@ -1,31 +1,25 @@
 import React, { useEffect, useState, useContext } from "react";
 import API from "../utils/API";
-import SearchBox from "../components/SearchBox";
+import InputBox from "../components/InputBox";
 import UserTable from "../components/UserTable";
 import { Col, Row } from "../components/Grid";
 import UserContext from '../context/userContext';
-import { useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-function Users(props) {
+function Users() {
     const [users, setUsers] = useState([])
     const [formObject, setFormObject] = useState({
         name: ""
     });
     const { userData } = useContext(UserContext);
-    const history = useHistory();
 
     useEffect(() => {
-        if (!userData.user) {
-            // console.log("userData", userData);
-            history.push("/signin");
-        } else {
-            API.getAllUsers()
-                .then((res) => {
-                    // console.log("res", res);
-                    setUsers(res.data);
-                })
-                .catch(err => console.log(err));
-        }
+        API.getAllUsers()
+            .then((res) => {
+                // console.log("res", res);
+                setUsers(res.data);
+            })
+            .catch(err => console.log(err));
     }, []);
 
     useEffect(() => {
@@ -58,16 +52,17 @@ function Users(props) {
 
     return (
         <>
-            {userData.user ? (
+            {userData.isAdmin ? (
                 <div>
                     <Row>
                         <Col size={"12"} justify={'align-self-center'}>
                             <p className='float-left'>Search for User by name:</p>
-                            <SearchBox
+                            <InputBox
                                 handleInputChange={handleInputChange}
                                 name="name"
                                 value={formObject.name}
-                                filterby="name"
+                                placeholderText="name"
+                                clasNam="search"
                             />
                         </Col>
                     </Row>
@@ -79,8 +74,8 @@ function Users(props) {
                 </div>
             ) : (
                     <div>
-                        <h2>You are not logged in</h2>
-                        <Link to="/signin">Sign in</Link>
+                        <h2>You are not authorised to view user data</h2>
+                        <Link to="/">Back to System Design</Link>
                     </div>
                 )}
 

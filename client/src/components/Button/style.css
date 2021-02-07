@@ -1,0 +1,8 @@
+.btn {
+    margin: '10px 10px 10px 0';
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 2px;
+    border-color: black;
+    background-color: whitesmoke;
+}

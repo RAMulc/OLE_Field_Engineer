@@ -1,23 +1,23 @@
 import React from "react";
 import "./style.css";
 
-function SearchBox(props) {
+function InputBox(props) {
     return (
-        <form className="search float-left">
+        <form className={props.clasNam + ' frm float-left'}>
             <div className="form-group">
-                <br />
+                <label htmlFor={props.id}>{props.placeholderText}</label>
                 <input
                     value={props.value}
                     onChange={props.handleInputChange}
                     name={props.name}
-                    type="text"
+                    type={props.type}
                     className="form-control"
-                    placeholder={props.filterby}
-                    id={props.filterby}
+                    placeholder={props.placeholderText}
+                    id={props.id}
                 />
             </div>
         </form>
     );
 }
 
-export default SearchBox;
+export default InputBox;

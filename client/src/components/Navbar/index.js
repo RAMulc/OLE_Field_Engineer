@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import SignInOptions from "../auth/SignInOptions";
 import UserContext from '../../context/userContext';
 
@@ -9,7 +9,6 @@ function Navbar() {
     const [activePage, setActivePage] = useState("/systemdesign");
     const [isAdmin, setIsAdmin] = useState(false);
     const { userData } = useContext(UserContext);
-    const history = useHistory();
 
     useEffect(() => {
         setActivePage(window.location.pathname);
@@ -17,7 +16,7 @@ function Navbar() {
 
     useEffect(() => {
         setIsAdmin(userData.isAdmin);
-    }, [userData]);
+    }, [userData.isAdmin]);
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">

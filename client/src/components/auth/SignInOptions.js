@@ -7,7 +7,7 @@ function SignInOptions() {
     const { userData, setUserData } = useContext(UserContext);
     const history = useHistory();
 
-    const signup = () => history.push("/signup");
+    // const signup = () => history.push("/signup");
     const signin = () => history.push("/signin");
     const signout = () => {
         setUserData({

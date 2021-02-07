@@ -1,7 +1,5 @@
 import React from "react";
 import DataTable from 'react-data-table-component';
-import { Link } from "react-router-dom";
-import { useMediaQuery } from "react-responsive";
 
 const tableStyle = {
     headCells: {
@@ -48,9 +46,8 @@ const columnsMain = [
 ];
 
 function UserTable(props) {
-    console.log("dt", props.DataTable);
+    //console.log("dt", props.DataTable);
     return (
-
         <DataTable
             columns={columnsMain}
             data={props.DataTable.users}
