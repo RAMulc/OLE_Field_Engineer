@@ -1,7 +1,7 @@
 {
-  "name": "mern",
+  "name": "ole-field-engineer",
   "version": "0.1.0",
-  "description": "Mern Demo",
+  "description": "ole-field-engineer",
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {

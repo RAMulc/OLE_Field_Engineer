@@ -1,8 +1,8 @@
 {
-  "name": "mern",
+  "name": "ole-field-engineer",
   "homepage": "https://ramulc.github.io/OLE_Field_Engineer/",
   "version": "1.0.0",
-  "description": "Mern Demo",
+  "description": "ole-field-engineer",
   "main": "server.js",
   "scripts": {
     "predeploy": "npm run build",
@@ -16,7 +16,7 @@
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
-  "author": "",
+  "author": "rmulcrone",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^4.1.0",
