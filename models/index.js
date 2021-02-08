@@ -1,4 +1,4 @@
-// module.exports = {
-//     SystemDesign: require("./systemDesign"),
-//     User: require("./User")
-// };
+module.exports = {
+    SystemDesign: require("./systemDesign"),
+    User: require("./user")
+};
