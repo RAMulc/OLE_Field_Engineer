@@ -9,6 +9,9 @@ import InputBox from "../components/InputBox";
 import SystemDesignContext from '../context/SystemDesignContext';
 import UserContext from '../context/userContext';
 
+import "./style.css";
+import bgrnd from "../assets/bgrnd6.jpg";
+
 function Pdf() {
     const [drawingData, setDrawingData] = useState({
         _id: "",
@@ -22,7 +25,7 @@ function Pdf() {
     });
     const [btnName, setBtnName] = useState("Update");
     const [pdfLink, setPdfLink] = useState();
-    const [zoom, setZoom] = useState(1);
+    const [zoom, setZoom] = useState(0.8);
     const { systemDesigns } = useContext(SystemDesignContext);
     const { userData } = useContext(UserContext);
 
@@ -82,108 +85,112 @@ function Pdf() {
 
     return (
         <Container fluid={true}>
-            <Row>
-                <Col size="12">
-                    <Jumbotron>
-                        <Button onClick={onScaleClick} name="dec" label={"  -  "}></Button>
-                        {id.substring(0, 12)}
-                        <Button onClick={onScaleClick} name="inc" label={"  +  "}></Button>
-                    </Jumbotron>
-                </Col>
-            </Row>
-            {userData.isAdmin &&
-                <Row>
-                    <Col size="12">
-                        <Row>
-                            <Col size="10">
-                                <InputBox
-                                    handleInputChange={handleInputChange}
-                                    name="objectiveID"
-                                    value={drawingData.objectiveID}
-                                    id="objectiveID"
-                                    placeholderText="Objective ID"
-                                    clasNam="input medium"
-                                    width='150px'
-                                />
-                                <InputBox
-                                    handleInputChange={handleInputChange}
-                                    name="ptaDgnNumber"
-                                    value={drawingData.ptaDgnNumber}
-                                    id="ptaDgnNumber"
-                                    placeholderText="PTA Drawing Number"
-                                    clasNam="input medium"
-                                />
-                                <InputBox
-                                    handleInputChange={handleInputChange}
-                                    name="allocReference"
-                                    value={drawingData.allocReference}
-                                    id="allocReference"
-                                    placeholderText="Allocation Reference"
-                                    clasNam="input medium"
-                                    width='150px'
-                                />
-                                <InputBox
-                                    handleInputChange={handleInputChange}
-                                    name="revision"
-                                    value={drawingData.revision}
-                                    id="revision"
-                                    placeholderText="Revision"
-                                    clasNam="input narrow"
-                                />
-                                <InputBox
-                                    handleInputChange={handleInputChange}
-                                    name="filename"
-                                    value={drawingData.filename}
-                                    id="filename"
-                                    placeholderText="File name"
-                                    clasNam="input medium"
-                                />
+            <div className={"wrap"}>
+                <img src={bgrnd} alt="OLE Background" />
+                <div className={"main-page"}>
+                    <Row>
+                        <Col size="12">
+                            <Jumbotron>
+                                <Button onClick={onScaleClick} name="dec" label={"  -  "}></Button>
+                                {'  ' + id.substring(0, 12) + '  '}
+                                <Button onClick={onScaleClick} name="inc" label={"  +  "}></Button>
+                            </Jumbotron>
+                        </Col>
+                    </Row>
+                    <Row>
+                        {userData.isAdmin &&
+                            <Col size="12">
+                                <Row>
+                                    <Col size="10">
+                                        <InputBox
+                                            handleInputChange={handleInputChange}
+                                            name="objectiveID"
+                                            value={drawingData.objectiveID}
+                                            id="objectiveID"
+                                            placeholderText="Objective ID"
+                                            clasNam="input medium"
+                                            width='150px'
+                                        />
+                                        <InputBox
+                                            handleInputChange={handleInputChange}
+                                            name="ptaDgnNumber"
+                                            value={drawingData.ptaDgnNumber}
+                                            id="ptaDgnNumber"
+                                            placeholderText="PTA Drawing Number"
+                                            clasNam="input medium"
+                                        />
+                                        <InputBox
+                                            handleInputChange={handleInputChange}
+                                            name="allocReference"
+                                            value={drawingData.allocReference}
+                                            id="allocReference"
+                                            placeholderText="Allocation Reference"
+                                            clasNam="input medium"
+                                            width='150px'
+                                        />
+                                        <InputBox
+                                            handleInputChange={handleInputChange}
+                                            name="revision"
+                                            value={drawingData.revision}
+                                            id="revision"
+                                            placeholderText="Revision"
+                                            clasNam="input narrow"
+                                        />
+                                        <InputBox
+                                            handleInputChange={handleInputChange}
+                                            name="filename"
+                                            value={drawingData.filename}
+                                            id="filename"
+                                            placeholderText="File name"
+                                            clasNam="input medium"
+                                        />
 
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col size="10">
+                                        <InputBox
+                                            handleInputChange={handleInputChange}
+                                            name="title"
+                                            value={drawingData.title}
+                                            id="title"
+                                            placeholderText="Drawing Title"
+                                            clasNam="input wide"
+                                        />
+                                        <InputBox
+                                            handleInputChange={handleInputChange}
+                                            name="otherDgnNumbers"
+                                            value={drawingData.otherDgnNumbers.join(', ')}
+                                            id="otherDgnNumbers"
+                                            placeholderText="Other Drawing Numbers"
+                                            clasNam="input wide"
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col size="10">
+                                        <Button onClick={handleFormSubmit} name="update" label={btnName}></Button>
+                                    </Col>
+                                </Row>
+                            </Col>
+                        }
+                        <Row>
+                            <Col size="12">
+                                
                             </Col>
                         </Row>
                         <Row>
-                            <Col size="10">
-                                <InputBox
-                                    handleInputChange={handleInputChange}
-                                    name="title"
-                                    value={drawingData.title}
-                                    id="title"
-                                    placeholderText="Drawing Title"
-                                    clasNam="input wide"
-                                />
-                                <InputBox
-                                    handleInputChange={handleInputChange}
-                                    name="otherDgnNumbers"
-                                    value={drawingData.otherDgnNumbers.join(', ')}
-                                    id="otherDgnNumbers"
-                                    placeholderText="Other Drawing Numbers"
-                                    clasNam="input wide"
-                                />
+                            <Col size="12">
+                                <Link to="/" className={"link"}>← Back to Search</Link>
+                                <Document file={pdfLink} className={"pdf-doc"}>
+                                    <Page pageNumber={1} scale={zoom} />
+                                </Document>
                             </Col>
                         </Row>
-                        <Row>
-                            <Col size="10">
-                                <Button onClick={handleFormSubmit} name="update" label={btnName}></Button>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
-            }
-            <Row>
-                <Col size="12">
-
-                    <Document file={pdfLink}>
-                        <Page pageNumber={1} scale={zoom} />
-                    </Document>
-                </Col>
-            </Row>
-            <Row>
-                <Col size="2">
-                    <Link to="/">← Back to Search</Link>
-                </Col>
-
-            </Row>
-        </Container>
+                    </Row>
+                </div>
+            </div>
+        </Container >
 
     );
 }

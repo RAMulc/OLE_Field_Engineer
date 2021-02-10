@@ -7,6 +7,9 @@ import { Container, Col, Row } from "../../components/Grid";
 import InputBox from "../../components/InputBox";
 import Button from "../../components/Button";
 
+import "./style.css";
+import bgrnd from "../../assets/bgrnd3.JPG";
+
 function SignIn() {
     const [user, setUser] = useState({
         email: "",
@@ -48,9 +51,8 @@ function SignIn() {
                 if (inputErrors) {
                     let iErrors = [];
                     for (let i = 0; i < inputErrors.length; i++) {
-                        // for (const [key, value] of Object.entries(inputErrors[i])) {
-                        // iErrors.push(`${key}: ${value}`);
-                        for (const [value] of Object.entries(inputErrors[i])) {
+                        for (const [key, value] of Object.entries(inputErrors[i])) {
+                            // iErrors.push(`${key}: ${value}`);
                             iErrors.push(`${value}`);
                         }
                     }
@@ -60,54 +62,64 @@ function SignIn() {
     };
 
     return (
-        <Container>
-            <Row>
-                <Col size={"8"}>
-                    <br />
-                    <h4>
-                        <b>Login</b>
-                    </h4>
-                    <p>
-                        Don't have an account? <Link to="/signup">Register </Link>
-                    </p>
+        <Container fluid={true}>
+            <div className={"wrap"}>
+                <img src={bgrnd} alt="OLE Background" />
+                <div className={"login"}>
                     <Row>
-                        <Col size={"5"}>
-                            <InputBox
-                                handleInputChange={onChange}
-                                name="email"
-                                value={user.email}
-                                id="email"
-                                placeholderText="email"
-                                clasNam="input"
-                                type="text"
-                            />
+                        <Col size={"sm-6 md-8 lg-9"}>
+
+                        </Col>
+                        <Col size={"sm-6 md-4 lg-3"}>
+                            <div className={"input-form"}>
+                                <br />
+                                <h4>
+                                    <b>Login</b>
+                                </h4>
+                                <p>
+                                    Don't have an account? <Link to="/signup">Register </Link>
+                                </p>
+                                <Row>
+                                    <Col size={"12"}>
+                                        <InputBox
+                                            handleInputChange={onChange}
+                                            name="email"
+                                            value={user.email}
+                                            id="email"
+                                            placeholderText="email"
+                                            clasNam="input"
+                                            type="text"
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col size={"12"}>
+                                        <InputBox
+                                            handleInputChange={onChange}
+                                            name="password"
+                                            value={user.password}
+                                            id="password"
+                                            placeholderText="Password"
+                                            clasNam="input"
+                                            type="password"
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col size={"12"}>
+                                        {error.length > 0 && <ErrorNotification messages={error} clearError={() => setError([])} />}
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col size={"12"}>
+                                        <Button onClick={onSubmit} name="login" label="Login"></Button>
+                                    </Col>
+                                </Row>
+                            </div>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col size={"5"}>
-                            <InputBox
-                                handleInputChange={onChange}
-                                name="password"
-                                value={user.password}
-                                id="password"
-                                placeholderText="Password"
-                                clasNam="input"
-                                type="password"
-                            />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col size={"5"}>
-                            {error.length > 0 && <ErrorNotification messages={error} clearError={() => setError([])} />}
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col size={"5"}>
-                                <Button onClick={onSubmit} name="login" label="Login"></Button>
-                        </Col>
-                    </Row>
-                </Col>
-            </Row>
+                </div>
+            </div>
         </Container>
     );
 }

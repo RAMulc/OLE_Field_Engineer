@@ -1,13 +1,18 @@
-var React = require('react');
+import React from 'react';
+import Chart from "../OLEChart";
 
-
-
-function Sag(props) {
+export function BlowOff() {
     return (
         <div>
-            Sag
+            <Chart />
         </div>
     );
 }
 
-module.exports = Sag;
+export function Sag() {
+    return (
+        <div>
+            <Chart />
+        </div>
+    );
+}

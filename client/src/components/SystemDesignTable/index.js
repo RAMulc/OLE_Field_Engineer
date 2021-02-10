@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import DataTable from 'react-data-table-component';
+import DataTable, { createTheme } from 'react-data-table-component';
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import UserContext from '../../context/userContext';
@@ -18,6 +18,18 @@ const tableStyle = {
         },
     },
 };
+
+createTheme('systemDesign', {
+    text: {
+        primary: 'rgb(87, 85, 85)',
+    },
+    background: {
+        default: 'whitesmoke',
+    },
+    divider: {
+        default: 'green',
+    }
+});
 
 const columnsMain = [
     {
@@ -104,6 +116,7 @@ function EmpTable(props) {
             customStyles={tableStyle}
             fixedHeader={true}
             fixedHeaderScrollHeight={'75vh'}
+            theme="systemDesign"
         />)
 };
 

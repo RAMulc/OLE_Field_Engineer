@@ -2,7 +2,8 @@
     margin: '10px 10px 10px 0';
     border-style: solid;
     border-radius: 5px;
-    border-width: 2px;
-    border-color: black;
+    border-width: 1px;
+    border-color: rgb(224, 223, 223);
     background-color: whitesmoke;
+    padding: 3px;
 }

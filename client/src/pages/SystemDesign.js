@@ -5,6 +5,9 @@ import SystemDesignTable from "../components/SystemDesignTable";
 import { Container, Col, Row } from "../components/Grid";
 import SystemDesignContext from '../context/SystemDesignContext';
 
+import "./style.css";
+import bgrnd from "../assets/bgrnd4.jpg";
+
 function SystemDesign() {
     const { systemDesigns, setsystemDesigns } = useContext(SystemDesignContext);
     const [formObject, setFormObject] = useState({
@@ -46,46 +49,52 @@ function SystemDesign() {
 
     return (
         <Container fluid={true}>
-            <Row>
-                <Col size={"1"} justify={'align-self-start'}>
-                    <p className='float-left'>Search by:</p>
-                </Col>
-                <Col size={"11"} justify={'align-self-start'}>
-                    <InputBox
-                        handleInputChange={handleInputChange}
-                        name="ptaDgnNo"
-                        value={formObject.ptaDgnNo}
-                        id="PTA Drawing No."
-                        placeholderText="PTA Drawing No."
-                        clasNam="search"
-                        type="text"
-                    />
-                    <InputBox
-                        handleInputChange={handleInputChange}
-                        name="allocRef"
-                        value={formObject.allocRef}
-                        id="allocRef"
-                        placeholderText="Allocation Ref."
-                        clasNam="search"
-                        type="text"
-                    />
-                    <InputBox
-                        handleInputChange={handleInputChange}
-                        name="title"
-                        value={formObject.title}
-                        id="title"
-                        placeholderText="Title"
-                        clasNam="search"
-                        type="text"
-                    />
-                </Col>
-            </Row>
-            <Row>
-                <Col size={"12"} justify={'align-self-center'}>
-                    <SystemDesignTable DataTable={systemDesigns} />
-                </Col>
-            </Row>
+            <div className={"wrap"}>
+                <img src={bgrnd} alt="OLE Background" />
+                <div className={"main-page search-text"}>
+                    <Row>
+                        <Col size={"1"} justify={'align-self-start'}>
+                            <p className='float-left'>Search by:</p>
+                        </Col>
+                        <Col size={"11"} justify={'align-self-start'}>
+                            <InputBox
+                                handleInputChange={handleInputChange}
+                                name="ptaDgnNo"
+                                value={formObject.ptaDgnNo}
+                                id="PTA Drawing No."
+                                placeholderText="PTA Drawing No."
+                                clasNam="search medium"
+                                type="text"
+                            />
+                            <InputBox
+                                handleInputChange={handleInputChange}
+                                name="allocRef"
+                                value={formObject.allocRef}
+                                id="allocRef"
+                                placeholderText="Allocation Ref."
+                                clasNam="search medium"
+                                type="text"
+                            />
+                            <InputBox
+                                handleInputChange={handleInputChange}
+                                name="title"
+                                value={formObject.title}
+                                id="title"
+                                placeholderText="Title"
+                                clasNam="search medium-wide"
+                                type="text"
+                            />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col size={"12"} justify={'align-self-center'}>
+                            <SystemDesignTable DataTable={systemDesigns} />
+                        </Col>
+                    </Row>
+                </div>
+            </div>
         </Container>
+
     );
 }
 

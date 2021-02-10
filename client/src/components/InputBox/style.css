@@ -4,15 +4,17 @@ p {
 
 .frm {
     margin: '10px 10px 10px 0';
-    border-style: solid;
-    border-radius: 5px;
-    border-width: 2px;
-    border-color: black;
+}
+
+.inp {
     background-color: whitesmoke;
+    width: 100%;
+    font-size: 0.75rem;
 }
 
 label {
-    padding: 10px;
+    padding-left: 5px;
+    margin-bottom: 0px;
 }
 
 .search {
@@ -30,6 +32,10 @@ label {
 
 .medium {
     width: 200px;
+}
+
+.medium-wide {
+    width: 350px;
 }
 
 .wide {

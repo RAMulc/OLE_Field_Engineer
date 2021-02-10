@@ -1,5 +1,5 @@
 import React from "react";
-import DataTable from 'react-data-table-component';
+import DataTable, { createTheme } from 'react-data-table-component';
 
 const tableStyle = {
     headCells: {
@@ -14,7 +14,20 @@ const tableStyle = {
             paddingBottom: '15px'
         },
     },
+
 };
+
+createTheme('users', {
+    text: {
+        primary: 'rgb(87, 85, 85)',
+    },
+    background: {
+        default: 'whitesmoke',
+    },
+    divider: {
+        default: 'green',
+    }
+});
 
 const columnsMain = [
     {
@@ -55,6 +68,7 @@ function UserTable(props) {
             customStyles={tableStyle}
             fixedHeader={true}
             fixedHeaderScrollHeight={'75vh'}
+            theme="users"
         />)
 };
 
