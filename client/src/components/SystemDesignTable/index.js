@@ -99,7 +99,7 @@ const columnsEdit = [
         width: '75px',
     },];
 
-function EmpTable(props) {
+function SysDesTable(props) {
     const isMobile = useMediaQuery({ query: '(max-width: 1000px)' });
     const { userData } = useContext(UserContext);
 
@@ -120,4 +120,4 @@ function EmpTable(props) {
         />)
 };
 
-export default EmpTable;
+export default SysDesTable;

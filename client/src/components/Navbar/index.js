@@ -53,7 +53,7 @@ function Navbar() {
                     <li className={activePage === "/signin"
                         ? "nav-item active"
                         : "nav-item"}>
-                        <SignInOptions />
+                        <SignInOptions onClick={() => setActivePage("/signin")}/>
                     </li>
                     {isAdmin && (
                         <li className={activePage === "/users"

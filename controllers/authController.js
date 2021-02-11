@@ -172,4 +172,28 @@ module.exports = {
                 res.json({ users });
             })
     },
+    find: function (req, res) {
+        const filterCriteria = JSON.parse(req.params.criteria);
+        User.find({
+            name: { $regex: "(?i).*" + filterCriteria.name + ".*" }
+        })
+            .sort({ name: -1 })
+            .then(users => {
+                res.json({ users });
+            })
+    },
+    update: function (req, res) {
+        User.findOneAndUpdate({ _id: req.params.id }, req.body)
+            .then(response => {
+                res.status(200).json({
+                    success: true,
+                    result: response
+                })
+            })
+            .catch(err => {
+                res.status(500).json({
+                    errors: [{ error: err }]
+                });
+            });
+    }
 };

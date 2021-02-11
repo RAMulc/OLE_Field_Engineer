@@ -49,4 +49,12 @@ export default {
     getAllUsers: function () {
         return axios.get("/api/auth");
     },
+    // Get selective user
+    getUsersByFilter: function (filterCriteria) {
+        return axios.get("/api/auth/filter/" + filterCriteria);
+    },
+    // Saves user to the database
+    updateUser: function (id, userData) {
+        return axios.put("/api/auth/" + id, userData);
+    },
 };

@@ -1,23 +1,6 @@
-.wrap {
-    position: relative;
-    /* overflow: hidden; */
-    padding: 0px;
-    /* border: 1px dashed green; */
-}
-
-.wrap .main-page {
-    padding: 5px;
-    position: relative;
-    z-index: 2;
-}
-
-.wrap img {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    /* height: 100vh; */
-    opacity: 0.6;
+p {
+    background-color: rgb(245, 245, 245, 0.6);
+    border-radius: 5px;
 }
 
 .input-form {
@@ -36,8 +19,18 @@
     padding-left: 30px;
 }
 
+.pdf-div {
+    color: rgb(31, 50, 216);
+    font-family: sans-serif;
+    font-size: 30px;
+    background-color: rgba(212, 214, 211, 0.15);
+}
+
 .link {
-    color: white;
+    color: rgb(31, 50, 216);
+    background-color: rgba(245, 245, 245, 0.5);
+    border-radius: 5px;
+    font-size: 15px;
 }
 
 .cent {
@@ -45,15 +38,6 @@
 }
 
 @media screen and (max-width: 992px) {
-    .wrap img {
-        position: absolute;
-        left: 0;
-        top: 0;
-        /* width: 100%; */
-        height: 100vh;
-        opacity: 0.6;
-    }
-
     .wide {
         width: 300px;
     }

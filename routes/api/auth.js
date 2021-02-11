@@ -11,5 +11,8 @@ router.route('/tokenIsValid')
     .post(authController.tokenIsValid);
 router.route('/:id')
     .get(authController.findById)
+    .put(authController.update)
+router.route("/filter/:criteria")
+    .get(authController.find);
 
 module.exports = router;

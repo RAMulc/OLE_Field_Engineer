@@ -6,10 +6,18 @@ p {
     margin: '10px 10px 10px 0';
 }
 
-.inp {
+.frm-comp {
     background-color: whitesmoke;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.inp {
+    background-color:rgb(240, 247, 240);
     width: 100%;
     font-size: 0.75rem;
+    padding: 3px;
+    height: 1.5rem;
 }
 
 label {
@@ -35,9 +43,9 @@ label {
 }
 
 .medium-wide {
-    width: 350px;
+    width: 300px;
 }
 
 .wide {
-    width: 620px;
+    width: 465px;
 }

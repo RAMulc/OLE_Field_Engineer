@@ -63,7 +63,7 @@ function SignUp() {
     return (
         <Container fluid={true}>
             <div className={"wrap"}>
-                <img src={bgrnd} alt="OLE Background" />
+                {/* <img src={bgrnd} alt="OLE Background" /> */}
                 <div className={"login"}>
                     <Row>
                         <Col size={"sm-6 md-8 lg-9"}>

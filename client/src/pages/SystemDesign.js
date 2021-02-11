@@ -49,8 +49,6 @@ function SystemDesign() {
 
     return (
         <Container fluid={true}>
-            <div className={"wrap"}>
-                <img src={bgrnd} alt="OLE Background" />
                 <div className={"main-page search-text"}>
                     <Row>
                         <Col size={"1"} justify={'align-self-start'}>
@@ -92,9 +90,7 @@ function SystemDesign() {
                         </Col>
                     </Row>
                 </div>
-            </div>
         </Container>
-
     );
 }
 

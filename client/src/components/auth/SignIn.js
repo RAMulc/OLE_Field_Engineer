@@ -64,7 +64,7 @@ function SignIn() {
     return (
         <Container fluid={true}>
             <div className={"wrap"}>
-                <img src={bgrnd} alt="OLE Background" />
+                {/* <img src={bgrnd} alt="OLE Background" /> */}
                 <div className={"login"}>
                     <Row>
                         <Col size={"sm-6 md-8 lg-9"}>
@@ -112,7 +112,9 @@ function SignIn() {
                                 </Row>
                                 <Row>
                                     <Col size={"12"}>
-                                        <Button onClick={onSubmit} name="login" label="Login"></Button>
+                                        <div style={{ padding: '10px' }}>
+                                            <Button onClick={onSubmit} name="login" label="Login"></Button>
+                                        </div>
                                     </Col>
                                 </Row>
                             </div>

@@ -4,7 +4,7 @@ import "./style.css";
 function InputBox(props) {
     return (
         <form className={props.clasNam + ' frm float-left'}>
-            <div>
+            <div className={"frm-comp"}>
                 <label htmlFor={props.id}>{props.placeholderText}</label>
                 <input
                     value={props.value}
