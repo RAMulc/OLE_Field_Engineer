@@ -34,7 +34,6 @@ function SignIn() {
             email: user.email,
             password: user.password
         };
-        console.log("ud", userData);
         API.userSignIn(userData)
             .then((res) => {
                 console.log("rd", res.data);

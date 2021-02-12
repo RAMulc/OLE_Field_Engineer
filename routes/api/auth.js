@@ -12,6 +12,7 @@ router.route('/tokenIsValid')
 router.route('/:id')
     .get(authController.findById)
     .put(authController.update)
+    // .delete(authController.remove);
 router.route("/filter/:criteria")
     .get(authController.find);
 

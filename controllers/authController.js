@@ -130,6 +130,7 @@ module.exports = {
                         }
                     });
                 }).catch(err => {
+                    console.log("bcrypt", err);
                     res.status(500).json({ errors: err });
                 });
             }
@@ -195,5 +196,11 @@ module.exports = {
                     errors: [{ error: err }]
                 });
             });
-    }
+    },
+    // remove: function (req, res) {
+    //     User.findById({ _id: req.params.id })
+    //         .then(user => user.remove())
+    //         .then(user => res.json(user))
+    //         .catch(err => res.status(422).json(err));
+    // }
 };
