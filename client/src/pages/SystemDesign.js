@@ -6,7 +6,6 @@ import { Container, Col, Row } from "../components/Grid";
 import SystemDesignContext from '../context/SystemDesignContext';
 
 import "./style.css";
-import bgrnd from "../assets/bgrnd4.jpg";
 
 function SystemDesign() {
     const { systemDesigns, setsystemDesigns } = useContext(SystemDesignContext);

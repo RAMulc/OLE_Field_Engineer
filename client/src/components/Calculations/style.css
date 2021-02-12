@@ -1,0 +1,19 @@
+p {
+    font-size: 12px;
+}
+
+label {
+    font-size: 12px;
+}
+
+.ole-chart {
+    background-color: rgb(224, 220, 220);
+    border-radius: 20px;
+    padding: 50px;
+    width: fit-content;
+    height: fit-content;
+    margin: 20px;
+    font-size: 12px;
+    
+}
+

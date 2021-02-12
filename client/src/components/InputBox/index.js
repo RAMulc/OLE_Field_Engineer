@@ -2,8 +2,12 @@ import React from "react";
 import "./style.css";
 
 function InputBox(props) {
+    function handleSubmit(e) {
+        e.preventDefault();
+    };
+    
     return (
-        <form className={props.clasNam + ' frm float-left'}>
+        <form onSubmit={handleSubmit} className={props.clasNam + ' frm float-left'}>
             <div className={"frm-comp"}>
                 <label htmlFor={props.id}>{props.placeholderText}</label>
                 <input

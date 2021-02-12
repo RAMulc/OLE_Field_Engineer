@@ -26,17 +26,18 @@ function ProtectedRoute({ component: Component, ...rest }) {
                             setUserData({
                                 token: token,
                                 user: userRes.data.user.name,
-                                isAdmin: userRes.data.user.isAdmin
+                                isAdmin: userRes.data.user.isAdmin,
+                                email: userRes.data.user.email
                             })
                         })
                         .then(() => { 
-                            console.log("loggedin");
+                            // console.log("loggedin");
                             return true; 
                         })
                 }
             })
             .catch(err => {
-                console.log(err);
+                // console.log(err);
                 console.log("not loggedin");
                 return false;
             });

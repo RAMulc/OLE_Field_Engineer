@@ -3,7 +3,7 @@ import Button from "../Button";
 import "./style.css";
 
 function ErrorNotification(props) {
-    console.log(props.messages);
+    // console.log(props.messages);
     return (
         <div className={"float-left"}>
             {/* {props.messages.map(message => <p>{message}</p>)} */}

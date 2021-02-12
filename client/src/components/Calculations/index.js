@@ -1,10 +1,9 @@
 import React from 'react';
-import Chart from "../OLEChart";
 
 export function BlowOff() {
     return (
         <div>
-            <Chart />
+            <p>Blow-Off calculation under development</p>
         </div>
     );
 }
@@ -12,7 +11,7 @@ export function BlowOff() {
 export function Sag() {
     return (
         <div>
-            <Chart />
+            <p>Sag calculation under development</p>
         </div>
     );
 }

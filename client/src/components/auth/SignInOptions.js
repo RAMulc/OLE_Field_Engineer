@@ -12,7 +12,9 @@ function SignInOptions() {
     const signout = () => {
         setUserData({
             token: undefined,
-            user: undefined
+            user: undefined,
+            email: undefined,
+            isAdmin: false
         })
         localStorage.setItem("auth-token", "");
     };

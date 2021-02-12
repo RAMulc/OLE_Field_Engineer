@@ -3,12 +3,16 @@ import DataTable, { createTheme } from 'react-data-table-component';
 import API from "../../utils/API";
 import AllUsersContext from '../../context/allUsersContext';
 import AllUsersSearchContext from '../../context/allUsersSearchContext';
+import UserContext from "../../context/userContext";
 
-function UserTable(props) {
+function UserTable() {
     const [activeUser, setActiveUser] = useState({});;
-    const { users, setUsers } = useContext(AllUsersContext);
-    const { formObject, setFormObject } = useContext(AllUsersSearchContext);
     const [tableData, setTableData] = useState();
+
+    const { users, setUsers } = useContext(AllUsersContext);
+    const { userData } = useContext(UserContext);
+    const { formObject } = useContext(AllUsersSearchContext);
+
 
     useEffect(() => {
         setTableData(users.users);
@@ -55,7 +59,7 @@ function UserTable(props) {
         {
             name: 'Administrator',
             selector: 'isAdmin',
-            cell: row => <button onClick={toggleAdmin} name={row._id}><p>{row.isAdmin ? 'Yes' : 'No'}</p></button>,
+            cell: row => <button onClick={toggleAdmin} name={row._id}>{row.isAdmin ? 'Yes' : 'No'}</button>,
             sortable: true,
         },
         {
@@ -72,22 +76,28 @@ function UserTable(props) {
 
     function removeUser(event) {
         const user = getSelectedUser(event.target.name);
-        API.removeUser(user._id)
-            .then((res) => {
-                refreshTable();
-            })
-            .catch(err => console.log(err));
+        // Admin account cannot remove themselves
+        if (userData.email !== user.email) {
+            API.removeUser(user._id)
+                .then((res) => {
+                    refreshTable();
+                })
+                .catch(err => console.log(err));
+        }
     }
 
     function toggleAdmin(event) {
         const eUser = getSelectedUser(event.target.name);
-        const nUser = { ...eUser, isAdmin: !eUser.isAdmin };
-        API.updateUser(nUser._id, nUser)
-            .then((res) => {
-                setActiveUser(res.data.result);
-                refreshTable();
-            })
-            .catch(err => console.log(err));
+        // Admin account cannot modify level themselves
+        if (userData.email !== eUser.email) {
+            const nUser = { ...eUser, isAdmin: !eUser.isAdmin };
+            API.updateUser(nUser._id, nUser)
+                .then((res) => {
+                    setActiveUser(res.data.result);
+                    refreshTable();
+                })
+                .catch(err => console.log(err));
+        }
     }
 
     function refreshTable() {
@@ -105,7 +115,7 @@ function UserTable(props) {
 
     function getSelectedUser(id) {
         let data = tableData.filter(function (user) {
-            return user._id == id;
+            return user._id === id;
         });
         return data[0];
     }

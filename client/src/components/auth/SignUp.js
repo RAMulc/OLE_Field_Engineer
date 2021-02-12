@@ -35,7 +35,7 @@ function SignUp() {
         };
         API.userSignUp(newUser)
             .then((res) => {
-                console.log("res", res);
+                // console.log("res", res);
                 setUserData({
                     token: "",
                     user: res.data.result.name,

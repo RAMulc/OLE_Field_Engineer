@@ -29,20 +29,20 @@ function SignIn() {
 
     function onSubmit(e) {
         e.preventDefault();
-        const userData = {
+        const uData = {
             email: user.email,
             password: user.password
         };
-        API.userSignIn(userData)
+        API.userSignIn(uData)
             .then((res) => {
-                console.log("rd", res.data);
-                setUserData({
+                setUserData({...userData,
                     token: res.data.token,
                     user: res.data.message.name,
+                    email: res.data.message.email,
                     isAdmin: res.data.message.isAdmin
                 })
                 localStorage.setItem("auth-token", res.data.token);
-                history.push("/");
+                history.push("/systemdesign");
             })
             .catch(err => {
                 const inputErrors = err.response.data.errors;

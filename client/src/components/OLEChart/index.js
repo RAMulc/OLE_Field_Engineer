@@ -1,19 +1,18 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Chart } from 'react-charts'
 
-function OLEChart() {
+// import './style.css';
+
+
+function OLEChart(props) {
     const data = React.useMemo(
         () => [
             {
-                label: 'Series 1',
-                data: [[0, 1], [1, 2], [2, 4], [3, 2], [4, 7]]
+                label: props.lbel,
+                data: props.chartData
             },
-            {
-                label: 'Series 2',
-                data: [[0, 3], [1, 1], [2, 5], [3, 6], [4, 4]]
-            }
         ],
-        []
+        [props.chartData]
     )
 
     const axes = React.useMemo(
@@ -21,17 +20,19 @@ function OLEChart() {
             { primary: true, type: 'linear', position: 'bottom' },
             { type: 'linear', position: 'left' }
         ],
-        []
+        [props.chartData]
     )
 
     return (
-        <div
-            style={{
-                width: '400px',
-                height: '300px'
-            }}
-        >
-            <Chart data={data} axes={axes} />
+        <div>
+            <div
+                style={{
+                    width: '500px',
+                    height: '400px'
+                }}
+            >
+                <Chart className={"chart"} data={data} axes={axes} />
+            </div>
         </div>
     );
 }

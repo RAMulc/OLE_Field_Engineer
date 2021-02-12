@@ -58,7 +58,7 @@ export default {
         return axios.put("/api/auth/" + id, userData);
     },
     // Deletes the user with the given id
-    // removeUser: function (id) {
-    //     return axios.delete("/api/auth/" + id);
-    // },
+    removeUser: function (id) {
+        return axios.delete("/api/auth/" + id);
+    },
 };

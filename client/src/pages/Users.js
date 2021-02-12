@@ -20,7 +20,6 @@ function Users() {
     useEffect(() => {
         API.getAllUsers()
             .then((res) => {
-                // console.log("res", res);
                 setUsers(res.data);
             })
             .catch(err => console.log(err));
@@ -43,7 +42,6 @@ function Users() {
         API.getUsersByFilter(JSON.stringify(userName))
             .then((res) => {
                 setUsers(res.data);
-                // console.log("results:", res.data);
             })
             .catch(err => console.log(err));
     };
@@ -70,7 +68,7 @@ function Users() {
                                 <Row>
                                     <Col size={"2"} />
                                     <Col size={"8"} >
-                                        <UserTable dataTable={users}/>
+                                        <UserTable />
                                     </Col>
                                 </Row>
                             </div>

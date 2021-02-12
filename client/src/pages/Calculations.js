@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import Dropdown from 'react-bootstrap/Dropdown'
 import { Col, Row, Container } from "../components/Grid";
-import Button from "../components/Button";
 import { BlowOff, Sag } from '../components/Calculations';
+import TensionState from '../components/Calculations/TensionState';
 
 function Calculations() {
     const [calcType, setCalcType] = useState();
@@ -13,15 +14,32 @@ function Calculations() {
 
     return (
         <div>
-            <Container>
+            <Container fluid={true}>
                 <Row>
                     <Col size="2">
-                        <Button onClick={onsubmit} name="blow-off" label={"Blow Off"}></Button>
-                        <Button onClick={onsubmit} name="sag" label={"Conductor Sag"}></Button>
+                        <Dropdown>
+                            <Dropdown.Toggle variant="success" id="dropdown-item-button">
+                                Select Calculation
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                <Dropdown.Item onClick={onsubmit} name={"sag"} href="#">
+                                    Conductor Sag
+                                </Dropdown.Item>
+                                <Dropdown.Item onClick={onsubmit} name={"blow-off"} href="#">
+                                    Conductor Blow-Off
+                                </Dropdown.Item>
+                                <Dropdown.Item onClick={onsubmit} name={"tensionState"} href="#">
+                                    Temperature Tension
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </Col>
+                </Row>
+                <Row>
                     <Col size="8">
                         {calcType === "blow-off" && <BlowOff />}
                         {calcType === "sag" && <Sag />}
+                        {calcType === "tensionState" && <TensionState />}
                     </Col>
                 </Row>
             </Container>

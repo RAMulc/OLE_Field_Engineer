@@ -37,6 +37,10 @@ p {
     justify-content: center;
 }
 
+#dropdown-item-button {
+    background-color: green;
+}
+
 @media screen and (max-width: 992px) {
     .wide {
         width: 300px;
