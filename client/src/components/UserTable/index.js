@@ -58,26 +58,26 @@ function UserTable(props) {
             cell: row => <button onClick={toggleAdmin} name={row._id}><p>{row.isAdmin ? 'Yes' : 'No'}</p></button>,
             sortable: true,
         },
-        // {
-        //     name: 'Remove Account',
-        //     selector: '_id',
-        //     cell: row => <button onClick={removeUser} name={row._id}>X</button>,
-        //     ignoreRowClick: true,
-        //     allowOverflow: true,
-        //     button: true,
-        //     center: true,
-        //     width: '75px',
-        // },
+        {
+            name: 'Remove Account',
+            selector: '_id',
+            cell: row => <button onClick={removeUser} name={row._id}>X</button>,
+            ignoreRowClick: true,
+            allowOverflow: true,
+            button: true,
+            center: true,
+            width: '75px',
+        },
     ];
 
-    // function removeUser(event) {
-    //     const user = getSelectedUser(event.target.name);
-    //     API.removeUser(user._id)
-    //         .then((res) => {
-    //             refreshTable();
-    //         })
-    //         .catch(err => console.log(err));
-    // }
+    function removeUser(event) {
+        const user = getSelectedUser(event.target.name);
+        API.removeUser(user._id)
+            .then((res) => {
+                refreshTable();
+            })
+            .catch(err => console.log(err));
+    }
 
     function toggleAdmin(event) {
         const eUser = getSelectedUser(event.target.name);

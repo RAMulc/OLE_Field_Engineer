@@ -8,7 +8,6 @@ import InputBox from "../../components/InputBox";
 import Button from "../../components/Button";
 
 import "./style.css";
-import bgrnd from "../../assets/bgrnd3.JPG";
 
 function SignIn() {
     const [user, setUser] = useState({
@@ -62,64 +61,61 @@ function SignIn() {
 
     return (
         <Container fluid={true}>
-            <div className={"wrap"}>
-                {/* <img src={bgrnd} alt="OLE Background" /> */}
-                <div className={"login"}>
-                    <Row>
-                        <Col size={"sm-6 md-8 lg-9"}>
+            <div className={"login"}>
+                <Row>
+                    <Col size={"sm-6 md-8 lg-9"}>
 
-                        </Col>
-                        <Col size={"sm-6 md-4 lg-3"}>
-                            <div className={"input-form"}>
-                                <br />
-                                <h4>
-                                    <b>Login</b>
-                                </h4>
-                                <p>
-                                    Don't have an account? <Link to="/signup">Register </Link>
-                                </p>
-                                <Row>
-                                    <Col size={"12"}>
-                                        <InputBox
-                                            handleInputChange={onChange}
-                                            name="email"
-                                            value={user.email}
-                                            id="email"
-                                            placeholderText="email"
-                                            clasNam="input"
-                                            type="text"
-                                        />
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col size={"12"}>
-                                        <InputBox
-                                            handleInputChange={onChange}
-                                            name="password"
-                                            value={user.password}
-                                            id="password"
-                                            placeholderText="Password"
-                                            clasNam="input"
-                                            type="password"
-                                        />
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col size={"12"}>
-                                        {error.length > 0 && <ErrorNotification messages={error} clearError={() => setError([])} />}
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col size={"12"}>
-                                        <div style={{ padding: '10px' }}>
-                                            <Button onClick={onSubmit} name="login" label="Login"></Button>
-                                        </div>
-                                    </Col>
-                                </Row>
-                            </div>
-                        </Col>
-                    </Row>
-                </div>
+                    </Col>
+                    <Col size={"sm-6 md-4 lg-3"}>
+                        <div className={"input-form"}>
+                            <br />
+                            <h4>
+                                <b>Login</b>
+                            </h4>
+                            <p>
+                                Don't have an account? <Link to="/signup">Register </Link>
+                            </p>
+                            <Row>
+                                <Col size={"12"}>
+                                    <InputBox
+                                        handleInputChange={onChange}
+                                        name="email"
+                                        value={user.email}
+                                        id="email"
+                                        placeholderText="email"
+                                        clasNam="input"
+                                        type="text"
+                                    />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col size={"12"}>
+                                    <InputBox
+                                        handleInputChange={onChange}
+                                        name="password"
+                                        value={user.password}
+                                        id="password"
+                                        placeholderText="Password"
+                                        clasNam="input"
+                                        type="password"
+                                    />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col size={"12"}>
+                                    {error.length > 0 && <ErrorNotification messages={error} clearError={() => setError([])} />}
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col size={"12"}>
+                                    <div style={{ padding: '10px' }}>
+                                        <Button onClick={onSubmit} name="login" label="Login"></Button>
+                                    </div>
+                                </Col>
+                            </Row>
+                        </div>
+                    </Col>
+                </Row>
             </div>
         </Container>
     );
