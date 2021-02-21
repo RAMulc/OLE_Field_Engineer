@@ -36,7 +36,7 @@ function Calculations() {
                     </Col>
                 </Row>
                 <Row>
-                    <Col size="8">
+                    <Col size="12">
                         {calcType === "blow-off" && <BlowOff />}
                         {calcType === "sag" && <Sag />}
                         {calcType === "tensionState" && <TensionState />}

@@ -1,5 +1,7 @@
 p {
     font-size: 12px;
+    min-width: 180px;
+    margin: 10px
 }
 
 label {
@@ -7,13 +9,16 @@ label {
 }
 
 .ole-chart {
-    background-color: rgb(224, 220, 220);
+    background-color: rgb(252, 252, 252);
     border-radius: 20px;
-    padding: 50px;
+    padding: 20px;
     width: fit-content;
     height: fit-content;
     margin: 20px;
     font-size: 12px;
-    
+    width: 100%;
 }
 
+.inputs {
+    width: 250px;
+}
