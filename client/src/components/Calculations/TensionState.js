@@ -91,6 +91,12 @@ function TensionState() {
         const maxSpan = 70;
         const catData = [];
         const seriesData = [];
+        setChartSeries([
+            {
+                name: "Tension/Span",
+                data: []
+            }
+        ]);
         try {
             for (let i = minSpan; i <= maxSpan; i = i + 1) {
                 const sData = { ...formObject, span: i };
